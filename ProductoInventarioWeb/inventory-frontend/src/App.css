@@ -1,0 +1,31 @@
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-container {
+  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #E4007C 0%, #B8005F 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(228, 0, 124, 0.2);
+  margin-bottom: 2rem;
+}
+
+.card-custom {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  border-left: 4px solid #E4007C;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #E4007C 0%, #B8005F 100%);
+}

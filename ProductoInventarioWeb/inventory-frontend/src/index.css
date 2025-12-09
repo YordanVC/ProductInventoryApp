@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #E4007C;
+  --bg-primary-dark: #B8005F;
+  --bg-primary-light: #FF1A8C;
+  --bg-secondary: #1A1A1A;
+  --bg-gray: #F5F5F5;
+  --bg-white: #FFFFFF;
+  --text-dark: #2C2C2C;
+  --text-light: #666666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+.p-button-success {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+}
+
+.p-button-success:enabled:hover {
+  background: var(--bg-primary-dark) !important;
+  border-color: var(--bg-primary-dark) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(228, 0, 124, 0.3) !important;
+}
+
+.p-button {
+  border-radius: 8px !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.p-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: none !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: var(--bg-primary) !important;
+  color: white !important;
+  font-weight: 600;
+  border: none !important;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  transition: all 0.2s ease;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: rgba(228, 0, 124, 0.05) !important;
+}
+
+.p-tag-success {
+  background: var(--bg-primary) !important;
+}
+
+.p-dialog .p-dialog-header {
+  background: var(--bg-primary) !important;
+  color: white !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.p-dialog .p-dialog-content {
+  border-radius: 0 0 12px 12px !important;
+}
