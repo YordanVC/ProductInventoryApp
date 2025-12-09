@@ -12,7 +12,7 @@ namespace ProductoInventarioApi.Repositories
         private readonly string _connectionString;
         public ProductRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
         }
         private IDbConnection GetConnection() => new SqlConnection(_connectionString);
         public async Task<(int Code, string Message)> ExecuteProductCommand(ProductRequest request)
