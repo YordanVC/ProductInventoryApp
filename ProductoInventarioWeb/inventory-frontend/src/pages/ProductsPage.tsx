@@ -43,25 +43,48 @@ const ProductsPage: React.FC = () => {
     };
 
     return (
-        <div className="app-container" style={{ minHeight: '100vh' }}>
+        <div className="app-container fade-in" style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%)' }}>
             <Toast ref={toast} />
 
             {/* Header con gradiente */}
             <div className="page-header">
-                <div className="flex justify-content-between align-items-center">
-                    <div>
-                        <h1 className="text-4xl font-bold m-0" style={{ color: 'white' }}>Gestión de Productos</h1>
-                        <p className="m-0 mt-2" style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem' }}>Sistema de Inventario - Banco Guayaquil</p>
+                <div className="flex justify-content-between align-items-center flex-wrap gap-3">
+                    <div className="flex-grow-1">
+                        <h1
+                            className="font-bold m-0"
+                            style={{
+                                color: 'white',
+                                fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+                                marginBottom: '0.5rem'
+                            }}
+                        >
+                            Gestión de Productos
+                        </h1>
+                        <p
+                            className="m-0"
+                            style={{
+                                color: 'rgba(255,255,255,0.95)',
+                                fontSize: 'clamp(0.875rem, 3vw, 1.1rem)',
+                                fontWeight: '500'
+                            }}
+                        >
+                            Sistema de Inventario - Banco Guayaquil
+                        </p>
                     </div>
                     <Button
                         label="Cerrar Sesión"
                         icon="pi pi-sign-out"
-                        className="p-button-outlined p-4 gap-2"
+                        iconPos="left"
+                        className="p-button-outlined"
                         style={{
                             background: 'white',
                             color: '#E4007C',
                             borderColor: 'white',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            padding: '0.75rem 1.25rem',
+                            fontSize: 'clamp(0.875rem, 2.5vw, 1rem)',
+                            whiteSpace: 'nowrap',
+                            gap: '0.5rem'
                         }}
                         onClick={handleLogout}
                     />
@@ -70,15 +93,35 @@ const ProductsPage: React.FC = () => {
 
             {/* Card de controles */}
             <div className="card-custom mb-4">
-                <div className="flex justify-content-between align-items-center gap-3">
-                    <div className="flex gap-3 align-items-center">
+                <div className="flex flex-wrap justify-content-between align-items-center gap-3">
+                    <div className="flex flex-wrap gap-3 align-items-center w-full md:w-auto">
                         <Button
                             label="Nuevo Producto"
                             icon="pi pi-plus"
-                            className='p-3 color-withe'
+                            iconPos="left"
                             severity="success"
                             onClick={openCreateModal}
-                            style={{ fontSize: '1rem', padding: '0.75rem 1.5rem' }}
+                            className="flex-grow-1 md:flex-grow-0"
+                            style={{
+                                fontSize: 'clamp(0.95rem, 2.5vw, 1rem)',
+                                padding: '0.75rem 1.25rem',
+                                fontWeight: '600',
+                                background: 'linear-gradient(135deg, #E4007C 0%, #B8005F 100%)',
+                                border: 'none',
+                                color: 'white',
+                                boxShadow: '0 3px 10px rgba(228, 0, 124, 0.25)',
+                                transition: 'all 0.3s ease',
+                                borderRadius: '8px',
+                                gap: '0.5rem'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-2px)';
+                                e.currentTarget.style.boxShadow = '0 5px 15px rgba(228, 0, 124, 0.35)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 3px 10px rgba(228, 0, 124, 0.25)';
+                            }}
                         />
                         <Dropdown
                             value={estadoFilter}
@@ -86,8 +129,11 @@ const ProductsPage: React.FC = () => {
                             onChange={(e) => setEstadoFilter(e.value)}
                             optionLabel="name"
                             placeholder="Filtrar por estado"
-                            className="w-full md:w-14rem"
-                            style={{ borderColor: '#E4007C' }}
+                            className="w-full md:w-auto"
+                            style={{
+                                minWidth: '200px',
+                                fontSize: 'clamp(0.875rem, 2.5vw, 0.95rem)'
+                            }}
                         />
                     </div>
                 </div>

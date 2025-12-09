@@ -44,7 +44,8 @@ const LoginPage: React.FC = () => {
             style={{
                 background: 'linear-gradient(135deg, #E4007C 0%, #B8005F 100%)',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                padding: '1rem'
             }}
         >
             {/* Decorative circles */}
@@ -71,15 +72,17 @@ const LoginPage: React.FC = () => {
 
             <Toast ref={toast} />
             <Card
-                className="w-full max-w-md p-4"
+                className="w-full fade-in"
                 style={{
+                    maxWidth: '480px',
                     boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
                     borderRadius: '16px',
                     zIndex: 1,
-                    background: 'white'
+                    background: 'white',
+                    margin: '0 auto'
                 }}
             >
-                <div className="text-center mb-5">
+                <div className="text-center mb-5" style={{ padding: '1.5rem 1rem 0.5rem' }}>
                     {/* Logo/Icono */}
                     <div
                         className="mb-3"
@@ -97,17 +100,37 @@ const LoginPage: React.FC = () => {
                     >
                         <i className="pi pi-shopping-cart" style={{ fontSize: '2.5rem', color: 'white' }}></i>
                     </div>
-                    <h1 className="text-3xl font-bold" style={{ color: '#E4007C', marginBottom: '0.5rem' }}>
+                    <h1
+                        className="font-bold"
+                        style={{
+                            color: '#E4007C',
+                            marginBottom: '0.5rem',
+                            fontSize: 'clamp(1.5rem, 5vw, 2rem)'
+                        }}
+                    >
                         Sistema de Inventario
                     </h1>
-                    <p className="text-gray-600 mt-2" style={{ fontSize: '0.95rem' }}>
+                    <p
+                        className="text-gray-600 mt-2"
+                        style={{
+                            fontSize: 'clamp(0.875rem, 3vw, 0.95rem)',
+                            fontWeight: '500'
+                        }}
+                    >
                         Banco Guayaquil
                     </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-fluid">
+                <form onSubmit={handleSubmit} className="p-fluid" style={{ padding: '0 1.5rem 1.5rem' }}>
                     <div className="field mb-4">
-                        <label htmlFor="username" className="block mb-2 font-semibold" style={{ color: '#2C2C2C' }}>
+                        <label
+                            htmlFor="username"
+                            className="block mb-2 font-semibold"
+                            style={{
+                                color: '#2C2C2C',
+                                fontSize: '0.95rem'
+                            }}
+                        >
                             Usuario
                         </label>
                         <InputText
@@ -117,12 +140,23 @@ const LoginPage: React.FC = () => {
                             placeholder="Ingrese su usuario"
                             required
                             autoFocus
-                            style={{ borderColor: '#E4007C' }}
+                            className="w-full"
+                            style={{
+                                padding: '0.75rem',
+                                fontSize: '0.95rem'
+                            }}
                         />
                     </div>
 
                     <div className="field mb-4">
-                        <label htmlFor="password" className="block mb-2 font-semibold" style={{ color: '#2C2C2C' }}>
+                        <label
+                            htmlFor="password"
+                            className="block mb-2 font-semibold"
+                            style={{
+                                color: '#2C2C2C',
+                                fontSize: '0.95rem'
+                            }}
+                        >
                             Contraseña
                         </label>
                         <Password
@@ -133,7 +167,11 @@ const LoginPage: React.FC = () => {
                             toggleMask
                             feedback={false}
                             required
-                            style={{ borderColor: '#E4007C' }}
+                            className="w-full"
+                            inputStyle={{
+                                padding: '0.75rem',
+                                fontSize: '0.95rem'
+                            }}
                         />
                     </div>
 
@@ -141,13 +179,18 @@ const LoginPage: React.FC = () => {
                         type="submit"
                         label="Iniciar Sesión"
                         icon="pi pi-sign-in"
+                        iconPos="left"
                         loading={loading}
-                        severity="success"
-                        className="w-full mt-3"
+                        className="w-full mt-4"
                         style={{
-                            padding: '0.75rem',
-                            fontSize: '1.1rem',
-                            fontWeight: 'bold'
+                            padding: '0.875rem',
+                            fontSize: 'clamp(0.95rem, 3vw, 1.1rem)',
+                            fontWeight: 'bold',
+                            borderRadius: '8px',
+                            gap: '0.5rem',
+                            background: 'linear-gradient(135deg, #E4007C 0%, #B8005F 100%)',
+                            border: 'none',
+                            color: 'white'
                         }}
                     />
                 </form>

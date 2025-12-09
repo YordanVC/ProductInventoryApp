@@ -87,38 +87,112 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ estadoFilter, onEdit, toa
         return new Intl.NumberFormat('es-EC', { style: 'currency', currency: 'USD' }).format(product.precio);
     };
 
-    // Template de Acciones 
+    // Template de Acciones
     const actionBodyTemplate = (product: ProductResponse) => {
         const isProductActive = product.estado === 'A';
         const buttonLabel = isProductActive ? 'Inactivar' : 'Activar';
         const buttonIcon = isProductActive ? 'pi pi-times-circle' : 'pi pi-check-circle';
-        const buttonSeverity = isProductActive ? 'danger' : 'success';
 
         return (
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-content-center flex-wrap">
                 <Button
                     icon="pi pi-pencil"
                     tooltip="Editar"
-                    severity="info"
+                    tooltipOptions={{ position: 'top' }}
                     onClick={() => onEdit(product)}
+                    outlined
+                    style={{
+                        minWidth: '2.5rem',
+                        height: '2.5rem',
+                        padding: '0.5rem',
+                        borderColor: '#E4007C',
+                        color: '#E4007C',
+                        background: 'white',
+                        transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.background = '#E4007C';
+                        e.currentTarget.style.color = 'white';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'white';
+                        e.currentTarget.style.color = '#E4007C';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                    }}
                 />
                 <Button
                     label={buttonLabel}
                     icon={buttonIcon}
-                    severity={buttonSeverity}
                     onClick={() => handleStatusChange(product)}
                     disabled={statusMutation.isPending}
+                    outlined={!isProductActive}
+                    iconPos="left"
+                    style={{
+                        fontSize: 'clamp(0.8rem, 2vw, 0.875rem)',
+                        padding: '0.5rem 1rem',
+                        fontWeight: '600',
+                        whiteSpace: 'nowrap',
+                        borderColor: isProductActive ? '#666' : '#E4007C',
+                        color: isProductActive ? '#666' : '#E4007C',
+                        background: 'white',
+                        transition: 'all 0.3s ease',
+                        borderRadius: '6px',
+                        gap: '0.5rem'
+                    }}
+                    onMouseEnter={(e) => {
+                        if (isProductActive) {
+                            e.currentTarget.style.background = '#666';
+                            e.currentTarget.style.color = 'white';
+                        } else {
+                            e.currentTarget.style.background = '#E4007C';
+                            e.currentTarget.style.color = 'white';
+                        }
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'white';
+                        e.currentTarget.style.color = isProductActive ? '#666' : '#E4007C';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                    }}
                 />
             </div>
         );
     };
 
     if (isLoading) {
-        return <div className="flex justify-content-center items-center h-48"><ProgressSpinner /></div>;
+        return (
+            <div className="flex justify-content-center align-items-center" style={{ minHeight: '300px' }}>
+                <div className="text-center">
+                    <ProgressSpinner
+                        style={{ width: '50px', height: '50px' }}
+                        strokeWidth="4"
+                    />
+                    <p className="mt-3" style={{ color: '#666', fontSize: '0.95rem' }}>
+                        Cargando productos...
+                    </p>
+                </div>
+            </div>
+        );
     }
 
     if (error) {
-        return <div className="text-red-600 p-4 border border-red-300 bg-red-50">Error al cargar productos: {error.message}</div>;
+        return (
+            <div
+                className="text-center p-4"
+                style={{
+                    color: '#d32f2f',
+                    background: '#ffebee',
+                    border: '2px solid #ef5350',
+                    borderRadius: '8px',
+                    fontSize: '0.95rem',
+                    fontWeight: '500'
+                }}
+            >
+                <i className="pi pi-exclamation-triangle mr-2" style={{ fontSize: '1.5rem', verticalAlign: 'middle' }}></i>
+                Error al cargar productos: {error.message}
+            </div>
+        );
     }
 
     const data = products || [];
@@ -126,21 +200,80 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ estadoFilter, onEdit, toa
     return (
         <>
             <ConfirmDialog />
-            <DataTable
-                value={data}
-                paginator rows={5}
-                dataKey="id"
-                emptyMessage="No se encontraron productos."
-                className="shadow-lg"
-            >
-                <Column field="codigo" header="Código" sortable style={{ width: '10%' }} />
-                <Column field="nombre" header="Nombre" sortable style={{ width: '25%' }} />
-                <Column field="lote_Numero" header="Lote" style={{ width: '15%' }} />
-                <Column field="stock" header="Stock" sortable style={{ width: '10%' }} />
-                <Column field="precio" header="Precio" body={priceBodyTemplate} sortable style={{ width: '10%' }} />
-                <Column field="estado" header="Estado" body={statusBodyTemplate} sortable style={{ width: '10%' }} />
-                <Column header="Acciones" body={actionBodyTemplate} exportable={false} style={{ width: '20%' }} />
-            </DataTable>
+            <div className="datatable-responsive-wrapper">
+                <DataTable
+                    value={data}
+                    paginator
+                    rows={10}
+                    rowsPerPageOptions={[5, 10, 25, 50]}
+                    dataKey="id"
+                    emptyMessage="No se encontraron productos."
+                    className="p-datatable-sm"
+                    stripedRows
+                    responsiveLayout="scroll"
+                    breakpoint="960px"
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} productos   "
+                >
+                    <Column
+                        field="codigo"
+                        header="Código"
+                        sortable
+                        style={{ minWidth: '120px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
+                        bodyStyle={{ fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '500' }}
+                    />
+                    <Column
+                        field="nombre"
+                        header="Nombre"
+                        sortable
+                        style={{ minWidth: '180px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
+                        bodyStyle={{ fontSize: 'clamp(0.8rem, 2vw, 0.95rem)' }}
+                    />
+                    <Column
+                        field="lote_Numero"
+                        header="Lote"
+                        style={{ minWidth: '140px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
+                        bodyStyle={{ fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontFamily: 'monospace' }}
+                    />
+                    <Column
+                        field="stock"
+                        header="Stock"
+                        sortable
+                        style={{ minWidth: '100px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
+                        bodyStyle={{ fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '600', textAlign: 'center' }}
+                    />
+                    <Column
+                        field="precio"
+                        header="Precio"
+                        body={priceBodyTemplate}
+                        sortable
+                        style={{ minWidth: '110px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
+                        bodyStyle={{ fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '600', color: '#2e7d32' }}
+                    />
+                    <Column
+                        field="estado"
+                        header="Estado"
+                        body={statusBodyTemplate}
+                        sortable
+                        style={{ minWidth: '100px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}
+                        bodyStyle={{ textAlign: 'center' }}
+                    />
+                    <Column
+                        header="Acciones"
+                        body={actionBodyTemplate}
+                        exportable={false}
+                        style={{ minWidth: '200px' }}
+                        headerStyle={{ fontWeight: '700', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', textAlign: 'center' }}
+                        bodyStyle={{ textAlign: 'center' }}
+                    />
+                </DataTable>
+            </div>
         </>
     );
 };

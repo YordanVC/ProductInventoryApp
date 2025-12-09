@@ -11,6 +11,10 @@
   --bg-white: #FFFFFF;
   --text-dark: #2C2C2C;
   --text-light: #666666;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --border-radius: 12px;
 }
 
 * {
@@ -20,12 +24,97 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
   color: var(--text-dark);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* ========================================
+   CONTENEDOR DE APLICACIÓN
+   ======================================== */
+.app-container {
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* ========================================
+   HEADER DE PÁGINA
+   ======================================== */
+.page-header {
+  background: linear-gradient(135deg, #E4007C 0%, #B8005F 100%);
+  padding: 2rem 3rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 1.5rem 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  .page-header p {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 1rem 0.75rem;
+  }
+  
+  .page-header h1 {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ========================================
+   CARDS PERSONALIZADAS
+   ======================================== */
+.card-custom {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin: 0 3rem 1.5rem 3rem;
+  transition: all 0.3s ease;
+}
+
+.card-custom:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .card-custom {
+    margin: 0 2rem 1.5rem 2rem;
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-custom {
+    margin: 0 1rem 1rem 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-custom {
+    margin: 0 0.75rem 1rem 0.75rem;
+    padding: 0.875rem;
+  }
+}
+
+/* ========================================
+   BOTONES PRIMEREACT
+   ======================================== */
 .p-button-success {
   background: var(--bg-primary) !important;
   border-color: var(--bg-primary) !important;
@@ -42,12 +131,52 @@ body {
   border-radius: 8px !important;
   font-weight: 600;
   transition: all 0.3s ease;
+  font-size: 0.95rem;
+  padding: 0.625rem 1.25rem;
 }
 
+@media (max-width: 768px) {
+  .p-button {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .p-button .p-button-label {
+    display: none;
+  }
+  
+  .p-button .p-button-icon {
+    margin: 0 !important;
+  }
+}
+
+.p-button-icon-only {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+@media (max-width: 480px) {
+  .p-button-icon-only {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+  }
+}
+
+/* ========================================
+   CARDS PRIMEREACT
+   ======================================== */
 .p-card {
-  border-radius: 12px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-md) !important;
   border: none !important;
+}
+
+/* ========================================
+   DATATABLE
+   ======================================== */
+.p-datatable {
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .p-datatable .p-datatable-thead > tr > th {
@@ -55,6 +184,8 @@ body {
   color: white !important;
   font-weight: 600;
   border: none !important;
+  font-size: 0.95rem;
+  padding: 1rem 0.75rem;
 }
 
 .p-datatable .p-datatable-tbody > tr {
@@ -65,16 +196,552 @@ body {
   background: rgba(228, 0, 124, 0.05) !important;
 }
 
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.875rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+  .p-datatable .p-datatable-thead > tr > th,
+  .p-datatable .p-datatable-tbody > tr > td {
+    font-size: 0.875rem;
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .p-datatable .p-datatable-thead > tr > th,
+  .p-datatable .p-datatable-tbody > tr > td {
+    font-size: 0.8rem;
+    padding: 0.625rem 0.375rem;
+  }
+  
+  .p-datatable .p-datatable-wrapper {
+    overflow-x: auto;
+  }
+}
+
+/* ========================================
+   TAGS
+   ======================================== */
+.p-tag {
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.375rem 0.75rem;
+}
+
 .p-tag-success {
   background: var(--bg-primary) !important;
+}
+
+@media (max-width: 768px) {
+  .p-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* ========================================
+   DIALOGS
+   ======================================== */
+.p-dialog {
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-lg) !important;
 }
 
 .p-dialog .p-dialog-header {
   background: var(--bg-primary) !important;
   color: white !important;
-  border-radius: 12px 12px 0 0 !important;
+  border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+  padding: 1.5rem !important;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .p-dialog .p-dialog-content {
-  border-radius: 0 0 12px 12px !important;
+  border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
+  padding: 1.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .p-dialog {
+    width: 95vw !important;
+    max-width: 95vw !important;
+  }
+  
+  .p-dialog .p-dialog-header {
+    padding: 1rem !important;
+    font-size: 1.1rem;
+  }
+  
+  .p-dialog .p-dialog-content {
+    padding: 1rem !important;
+  }
+}
+
+/* ========================================
+   INPUTS Y FORMULARIOS
+   ======================================== */
+.p-inputtext,
+.p-dropdown,
+.p-inputnumber-input {
+  border-radius: 8px !important;
+  border: 2px solid #e0e0e0 !important;
+  transition: all 0.3s ease !important;
+  font-size: 0.95rem;
+}
+
+.p-inputtext:focus,
+.p-dropdown:not(.p-disabled).p-focus,
+.p-inputnumber:not(.p-disabled).p-focus .p-inputnumber-input {
+  border-color: var(--bg-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(228, 0, 124, 0.25) !important;
+}
+
+@media (max-width: 768px) {
+  .p-inputtext,
+  .p-dropdown,
+  .p-inputnumber-input {
+    font-size: 0.875rem;
+  }
+}
+
+/* ========================================
+   CALENDAR ESPECÍFICO
+   ======================================== */
+.p-calendar {
+  display: flex !important;
+  width: 100%;
+}
+
+.p-calendar .p-inputtext {
+  border-radius: 8px 0 0 8px !important;
+  flex: 1;
+}
+
+.p-calendar-w-btn .p-inputtext {
+  border-right: none !important;
+}
+
+.p-calendar-w-btn .p-button {
+  border-radius: 0 8px 8px 0 !important;
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+  width: 3rem !important;
+}
+
+.p-calendar-w-btn .p-button:hover {
+  background: var(--bg-primary-dark) !important;
+  border-color: var(--bg-primary-dark) !important;
+}
+
+.p-calendar:not(.p-disabled).p-focus .p-inputtext {
+  border-color: var(--bg-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(228, 0, 124, 0.25) !important;
+}
+
+/* ========================================
+   INPUT NUMBER ESPECÍFICO
+   ======================================== */
+.p-inputnumber {
+  display: flex !important;
+  width: 100%;
+}
+
+.p-inputnumber-buttons-stacked .p-inputnumber-input {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.p-inputnumber-buttons-stacked .p-button-group {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.p-inputnumber-button {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+  color: white !important;
+  padding: 0 !important;
+  width: 3rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.p-inputnumber-button:enabled:hover {
+  background: var(--bg-primary-dark) !important;
+  border-color: var(--bg-primary-dark) !important;
+}
+
+.p-inputnumber-button .pi {
+  font-size: 1rem !important;
+  color: white !important;
+}
+
+.p-inputnumber-button-up {
+  border-radius: 0 8px 0 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.p-inputnumber-button-down {
+  border-radius: 0 0 8px 0 !important;
+}
+
+.field label {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .field label {
+    font-size: 0.875rem;
+  }
+}
+
+/* ========================================
+   DROPDOWN
+   ======================================== */
+.p-dropdown-panel {
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ========================================
+   TOAST MESSAGES
+   ======================================== */
+.p-toast {
+  z-index: 9999 !important;
+}
+
+.p-toast .p-toast-message {
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+@media (max-width: 768px) {
+  .p-toast {
+    width: 90vw !important;
+    left: 5vw !important;
+  }
+}
+
+/* ========================================
+   UTILIDADES RESPONSIVAS
+   ======================================== */
+@media (max-width: 768px) {
+  .flex-column-mobile {
+    flex-direction: column !important;
+  }
+  
+  .gap-mobile-2 {
+    gap: 0.5rem !important;
+  }
+  
+  .w-full-mobile {
+    width: 100% !important;
+  }
+  
+  .text-center-mobile {
+    text-align: center !important;
+  }
+}
+
+/* ========================================
+   SCROLLBAR PERSONALIZADA
+   ======================================== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-primary-dark);
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ========================================
+   CONFIRM DIALOG
+   ======================================== */
+.p-confirm-dialog {
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+@media (max-width: 768px) {
+  .p-confirm-dialog {
+    width: 90vw !important;
+  }
+}
+
+
+/* ========================================
+   PASSWORD INPUT
+   ======================================== */
+.p-password {
+  width: 100%;
+}
+
+.p-password-input {
+  width: 100% !important;
+  padding: 0.75rem !important;
+}
+
+.p-password-panel {
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ========================================
+   BUTTON GROUPS & TOOLBAR
+   ======================================== */
+.p-buttonset .p-button {
+  margin: 0 !important;
+}
+
+.p-buttonset .p-button:not(:last-child) {
+  border-right: none !important;
+}
+
+.p-toolbar {
+  background: white !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+}
+
+@media (max-width: 768px) {
+  .p-toolbar {
+    padding: 0.75rem !important;
+  }
+}
+
+/* ========================================
+   MESSAGES & INLINE MESSAGES
+   ======================================== */
+.p-message {
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+.p-inline-message {
+  border-radius: 6px !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* ========================================
+   PROGRESS BAR
+   ======================================== */
+.p-progressbar {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.p-progressbar .p-progressbar-value {
+  background: var(--bg-primary) !important;
+}
+
+/* ========================================
+   CHIP
+   ======================================== */
+.p-chip {
+  background: rgba(228, 0, 124, 0.1) !important;
+  color: var(--bg-primary) !important;
+  border-radius: 16px !important;
+  padding: 0.375rem 0.75rem !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   BADGE
+   ======================================== */
+.p-badge {
+  background: var(--bg-primary) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+}
+
+/* ========================================
+   OVERLAY PANEL
+   ======================================== */
+.p-overlaypanel {
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-lg) !important;
+  border: none !important;
+}
+
+.p-overlaypanel .p-overlaypanel-content {
+  padding: 1rem !important;
+}
+
+/* ========================================
+   MENU
+   ======================================== */
+.p-menu {
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-md) !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.p-menu .p-menuitem-link:hover {
+  background: rgba(228, 0, 124, 0.05) !important;
+}
+
+.p-menu .p-menuitem-link:focus {
+  box-shadow: none !important;
+  background: rgba(228, 0, 124, 0.1) !important;
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+.p-sidebar {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.p-sidebar .p-sidebar-header {
+  background: var(--bg-primary) !important;
+  color: white !important;
+  padding: 1.5rem !important;
+}
+
+.p-sidebar .p-sidebar-content {
+  padding: 1.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .p-sidebar {
+    width: 100vw !important;
+  }
+}
+
+/* ========================================
+   ACCORDION
+   ======================================== */
+.p-accordion .p-accordion-header .p-accordion-header-link {
+  border-radius: 8px !important;
+  background: white !important;
+  border: 1px solid #e0e0e0 !important;
+  margin-bottom: 0.5rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+  background: var(--bg-primary) !important;
+  color: white !important;
+  border-color: var(--bg-primary) !important;
+}
+
+.p-accordion .p-accordion-content {
+  border: 1px solid #e0e0e0 !important;
+  border-top: none !important;
+  border-radius: 0 0 8px 8px !important;
+  padding: 1rem !important;
+}
+
+/* ========================================
+   PANEL
+   ======================================== */
+.p-panel {
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.p-panel .p-panel-header {
+  background: var(--bg-primary) !important;
+  color: white !important;
+  border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+  border: none !important;
+  padding: 1rem 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.p-panel .p-panel-content {
+  padding: 1.5rem !important;
+}
+
+/* ========================================
+   CHECKBOX & RADIO
+   ======================================== */
+.p-checkbox .p-checkbox-box.p-highlight {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+}
+
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover,
+.p-radiobutton:not(.p-radiobutton-disabled) .p-radiobutton-box:hover {
+  border-color: var(--bg-primary) !important;
+}
+
+/* ========================================
+   SLIDER
+   ======================================== */
+.p-slider .p-slider-range {
+  background: var(--bg-primary) !important;
+}
+
+.p-slider .p-slider-handle {
+  border-color: var(--bg-primary) !important;
+  background: var(--bg-primary) !important;
+}
+
+/* ========================================
+   TOGGLE BUTTON
+   ======================================== */
+.p-togglebutton.p-button.p-highlight {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+}
+
+/* ========================================
+   SELECT BUTTON
+   ======================================== */
+.p-selectbutton .p-button.p-highlight {
+  background: var(--bg-primary) !important;
+  border-color: var(--bg-primary) !important;
+}
+
+/* ========================================
+   FINAL ENHANCEMENTS
+   ======================================== */
+.p-component {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }

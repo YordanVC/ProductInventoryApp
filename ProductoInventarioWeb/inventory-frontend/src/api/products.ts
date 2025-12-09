@@ -9,10 +9,12 @@ const PRODUCTS_QUERY_KEY = 'products';
 
 // Función para obtener productos desde la API
 const fetchProducts = async (estado: 'A' | 'I' | ''): Promise<ProductResponse[]> => {
-    const params = {
-        estado: estado,
-        id: undefined 
-    };
+    const params: { estado?: string } = {};
+    
+    // Solo agregar el parámetro estado si tiene valor
+    if (estado) {
+        params.estado = estado;
+    }
 
     const response = await api.get<ApiResponse<ProductResponse[]>>('/Products', { params });
 

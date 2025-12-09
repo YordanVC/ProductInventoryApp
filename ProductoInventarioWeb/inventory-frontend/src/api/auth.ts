@@ -48,6 +48,6 @@ export const authApi = {
         if (!token) return 0;
         
         const decoded = decodeToken(token);
-        return decoded?.ID ? parseInt(decoded.ID) : 0;
+        return decoded?.ID ? Number.parseInt(decoded.ID) : 0;
     }
 };
